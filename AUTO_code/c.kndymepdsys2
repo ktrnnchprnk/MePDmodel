@@ -1,0 +1,10 @@
+parnames = {1: 'I0', 2: 'Kp', 3:'jl', 4: 'je',5:'STA',6:'MinGl',7:'MinGe',8:'MaxGl',9:'MaxGe'}
+unames = {1: 'Gl', 2: 'Gi', 3: 'Ge',4: 'v', 5: 'NKB', 6: 'Dyn'}
+NDIM=   6, IPS =   1, IRS =   0, ILP =   1
+ICP =  ['I0', 'STA']
+NTST=  50, NCOL=   6, IAD =   3, ISP =   2, ISW = 1, IPLT= 0, NBC= 0, NINT= 0
+NMX=   3000, NPR=  300, MXBF=  10, IID =   2, ITMX= 8, ITNW= 7, NWTN= 3, JAC= 0
+EPSL= 1e-07, EPSU = 1e-07, EPSS =0.0001
+DS  =   0.001, DSMIN=  0.00001, DSMAX= 0.01, IADS=1
+NPAR = 15, THL =  {'PERIOD': 0.0}, THU =  {}
+UZSTOP = {'I0': 10}

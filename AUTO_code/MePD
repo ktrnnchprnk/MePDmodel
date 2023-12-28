@@ -1,0 +1,178 @@
+# Kp continuation
+
+r1=run('MePDv4', UZSTOP = {'Kp': 30})
+r2=run(r1('HB1'),IPS=2,NMX=5500,NPR=500,ICP=['Kp','PERIOD'],DS=0.0001,DSMAX=0.01)
+#r1.writeRawFilename('KpLCr1.dat')
+#r2.writeRawFilename('KpLCr2.dat')
+
+# Kp - alpha continuation 
+
+#r1=run('MePDv4', UZSTOP = {'Kp': 30}, PAR = {'alpha':1})
+#HB1=run(r1('HB1'),ISW=2,ICP=['Kp','alpha'],NMX=10000,NPR=1000,DSMAX=1e-2, UZSTOP = {'alpha': [0,2.0],'Kp': [0.0,25]})
+
+
+#r1=run('MePDv4', UZSTOP = {'Kp': 30}, PAR = {'alpha':0.85})
+
+#LP1v1=run(r1('LP1'),ISW=2,ICP=['Kp','alpha'],NMX=4000,NPR=1000,DSMAX=1e-2,UZSTOP = {'alpha': 2.0}, DS='-') #CP814
+
+#r1=run('MePDv4', UZSTOP = {'Kp': 30}, PAR = {'alpha':0.98})
+#r2=run(r1('HB1'),IPS=2,NMX=1430,NPR=15200,ICP=['Kp','PERIOD'],DS=0.0001,DSMAX=0.01)
+#HOM1=run(r2,IRS=9,IPS=9,ICP=['Kp','alpha'],NMX=6000,NPR=1000,DSMAX=1e-3,SP = ['BP5'])
+#HOM2=run(r2,IRS=9,IPS=9,ICP=['Kp','alpha'],NMX=6000,NPR=1000,DSMAX=1e-3,SP = ['BP5', 'LP1'], DS='-')
+
+
+#HB1.writeRawFilename('HB1.dat') 
+#HB2.writeRawFilename('HB2.dat')
+#LP1v1.writeRawFilename('LP1v1.dat')
+#LP2v1.writeRawFilename('LP2v1.dat')
+#LP2v2.writeRawFilename('LP2v2.dat')
+#LP1v2.writeRawFilename('LP1v2.dat')
+#HOM1.writeRawFilename('HOM1.dat')
+#HOM2.writeRawFilename('HOM2.dat')
+
+#GABA antagonist
+#r1=run('MePDv4', UZSTOP = {'Kp': 20})
+
+#HB1=run(r1('HB1'),ISW=2,ICP=['Kp','beta1'],NMX=10000,NPR=100,DSMAX=1e-2, DS='-', UZSTOP = {'beta1': [-2,2.0],'Kp': [-10.0,15]})
+#HB2=run(r1('HB1'),ISW=2,ICP=['Kp','beta1'],NMX=10000,NPR=1000,DSMAX=1e-2, UZSTOP = {'beta1': [-7,2.0],'Kp': [-10.0,30]})
+
+
+#LP1v1=run(r1('LP1'),ISW=2,ICP=['Kp','beta1'],NMX=5500,NPR=1000,DSMAX=1e-2,DS='-',UZSTOP = {'Kp': 20.0, 'beta1':1})
+
+#r1=run('MePDv4', UZSTOP = {'Kp': 20}, PAR = {'beta1': 0.45})
+#LP2v1=run(r1('LP4'),ISW=2,ICP=['Kp','beta1'],NMX=1500,NPR=200,DSMAX=1e-2,UZSTOP = {'beta1': 2.0})
+#LP2v2=run(r1('LP4'),ISW=2,ICP=['Kp','beta1'],NMX=1500,NPR=200,DSMAX=1e-2,UZSTOP = {'beta1': 1.0}, DS='-')
+
+
+#c1=run('MePDv4', PAR = {'beta1':0.20}, UZSTOP = {'Kp':[-5,30]}, NPR=4000)
+
+#c2=run(c1('HB1'),IPS=2,ICP=['Kp','PERIOD'],UZSTOP = {'Kp':[-5,25]},NMX=165, DSMAX=0.1)
+
+#HOM1=run(c2,IRS=6,IPS=9,ICP=['Kp','beta1', 'PERIOD'],NMX=25000,NPR=2000,DSMAX=1e-3, ISP =2,UZSTOP = {'beta1':[0,0.7936]}, SP=['BP5'], DS = '-')
+
+#c1=run('MePDv4', PAR = {'beta1':0.0}, UZSTOP = {'Kp':[-5,30]}, NPR=4000)
+#c2=run(c1('HB1'),IPS=2,ICP=['Kp','PERIOD'],UZSTOP = {'Kp':[-5,3]},NMX=165, DSMAX=0.1)
+#c3=run(c2,IRS=6,IPS=2,ICP=['beta1','PERIOD'],NMX=2000,NPR=3000,DSMAX=1e-3,UZSTOP = {'beta1':[-1,0.45]})
+#c4backwards=run(c3,IRS=7,IPS=2,ICP=['Kp','PERIOD'],NMX=230,NPR=2000,DSMAX=1e-2,UZSTOP = {'Kp':[-1,10]}, ISP =2, DS='-')
+#HOM2=run(c4backwards,IRS=8,IPS=9,ICP=['Kp','beta1', 'PERIOD'],NMX=25000,NPR=120,DSMAX=1e-2, ISP =2,UZSTOP = {'beta1':[0,0.7936]}, SP=['BP1', 'LP1'])
+
+
+#This thing is beautiful and works perfectly
+#c3=run(c2,IRS=6,IPS=2,ICP=['beta1','PERIOD'],NMX=2000,NPR=3000,DSMAX=1e-3,UZSTOP = {'beta1':[-1,0.61]})
+#c4backwards=run(c3,IRS=7,IPS=2,ICP=['Kp','PERIOD'],NMX=241,NPR=2000,DSMAX=1e-2,UZSTOP = {'Kp':[-1,10]}, ISP =2, DS='-')
+#HOM3=run(c4backwards,IRS=8,IPS=9,ICP=['Kp','beta1', 'PERIOD'],NMX=25000,NPR=10,DSMAX=1e-2, ISP =2,UZSTOP = {'beta1':[0,0.99]}, SP=['BP5', 'LP5'])
+
+#HOM4=run(c4backwards,IRS=8,IPS=9,ICP=['Kp','beta1', 'PERIOD'],NMX=25000,NPR=10,DSMAX=1e-2, ISP =2,UZSTOP = {'beta1':[0,0.99]}, SP=['BP5', 'LP5'], DS='-')
+
+#c3=run(c2,IRS=6,IPS=2,ICP=['beta1','PERIOD'],NMX=2000,NPR=3000,DSMAX=1e-3,UZSTOP = {'beta1':[-1,0.49]})
+#c4backwards=run(c3,IRS=7,IPS=2,ICP=['Kp','PERIOD'],NMX=237,NPR=2000,DSMAX=1e-2,UZSTOP = {'Kp':[-1,10]}, ISP =2, DS='-')
+#HOM5=run(c4backwards,IRS=8,IPS=9,ICP=['Kp','beta1', 'PERIOD'],NMX=25000,NPR=120,DSMAX=1e-2, ISP =2,UZSTOP = {'beta1':[0,0.7936]}, SP=['BP5', 'LP5'],DS='-')
+
+
+
+
+
+#HB1.writeRawFilename('HB1.dat') 
+#HB2.writeRawFilename('HB2.dat') 
+#LP1v1.writeRawFilename('LP1v1.dat')
+#LP2v1.writeRawFilename('LP2v1.dat')
+#LP2v2.writeRawFilename('LP2v2.dat')
+#HOM1.writeRawFilename('HOM1.dat')
+#HOM2.writeRawFilename('HOM2.dat')
+#HOM3.writeRawFilename('HOM3.dat')
+#HOM4.writeRawFilename('HOM4.dat')
+#HOM5.writeRawFilename('HOM5.dat')
+
+
+#cli cil 
+
+
+#g1=run('MePDv4', ICP=['cli', 'STA'],UZSTOP = {'cli': 0}, PAR = {'cil':40, 'cli':40, 'Kp':2.3, 'beta1':0}, U={1:0.0428, 2:0.0276, 3:0.0041},NMX=5000,NPR=500,DS='-')
+#HB1=run(g1('HB1'),ISW=2,ICP=['cil','cli'],NMX=10000,NPR=10000,DSMAX=1e-2,  UZSTOP = {'cli': [0,50.0],'cil': [0.0,50]})
+#HB2=run(g1('HB2'),ISW=2,ICP=['cil','cli'],NMX=10000,NPR=10000,DSMAX=1e-2,  UZSTOP = {'cli': [0,50.0],'cil': [0.0,50]})
+
+
+#l1=run('MePDv4', ICP=['cil', 'STA'],UZSTOP = {'cli': 100},PAR = {'cil':0, 'cli':40, 'Kp':2.3, 'beta1':0}, U={1:0.4986, 2:0.4998, 3:0.4997},NMX=16000,NPR=16000)
+#LP1v1=run(l1('LP2'),ISW=2,ICP=['cil','cli'],NMX=7000,NPR=2000,DSMAX=1e-2,UZSTOP = {'cli': [0,45.0],'cil': [0.0,45]})
+
+
+#l1=run('MePDv4', ICP=['cil', 'STA'],UZSTOP = {'cli': 100},PAR = {'cil':0, 'cli':20, 'Kp':2.3, 'beta1':0}, U={1:0.4986, 2:0.4998, 3:0.4997},NMX=16000,NPR=16000)
+#l2=run(l1('HB1'),IPS=2,NMX=245,NPR=40000,ICP=['cil','PERIOD'],DS=0.001,DSMAX=0.1)
+
+#HOM1=run(l2,IRS=6,IPS=9,ICP=['cil','cli', 'PERIOD'],NMX=30000,NPR=200,DSMAX=1e-2, ISP =2, SP=['BP1', 'LP1'], DS='-')
+
+#l1=run('MePDv4', ICP=['cil', 'STA'],UZSTOP = {'cli': 100},PAR = {'cil':0, 'cli':20, 'Kp':2.3, 'beta1':0}, U={1:0.4986, 2:0.4998, 3:0.4997},NMX=16000,NPR=16000)
+#l2=run(l1('HB1'),IPS=2,NMX=290,NPR=40000,ICP=['cil','PERIOD'],DS=0.001,DSMAX=0.1)
+
+#HOM2=run(l2,IRS=6,IPS=9,ICP=['cil','cli', 'PERIOD'],NMX=30000,NPR=200,DSMAX=1e-2, ISP =2, SP=['BP2', 'LP3'])
+
+#l1=run('MePDv4', ICP=['cil', 'STA'],UZSTOP = {'cli': 100},PAR = {'cil':0, 'cli':17, 'Kp':2.3, 'beta1':0}, U={1:0.4986, 2:0.4998, 3:0.4997},NMX=16000,NPR=16000)
+#l2=run(l1('HB1'),IPS=2,NMX=520,NPR=40000,ICP=['cil','PERIOD'],DS=0.001,DSMAX=0.1,UZSTOP = {'cil': 16})
+#l3=run(l2,IRS=6,IPS=2,NMX=1000,NPR=100,ICP=['cli','PERIOD'],DS='-',DSMAX=0.1,UZSTOP = {'cli': 12})
+#l4=run(l3, IRS=7,IPS=2,NMX=96,NPR=1000,ICP=['cil','PERIOD'],DSMAX=0.1)
+
+#HOM3=run(l4,IRS=8,IPS=9,ICP=['cil','cli', 'PERIOD'],NMX=30000,NPR=200,DSMAX=1e-2, ISP =2, SP=['BP3', 'LP3'])
+
+
+#l3=run(l2,IRS=6,IPS=2,NMX=1000,NPR=100,ICP=['cli','PERIOD'],DS='-',DSMAX=0.1,UZSTOP = {'cli': 12})
+#l4=run(l3, IRS=7,IPS=2,NMX=93,NPR=1000,ICP=['cil','PERIOD'],DSMAX=0.1)
+
+#HOM4=run(l4,IRS=8,IPS=9,ICP=['cil','cli', 'PERIOD'],NMX=30000,NPR=25,DSMAX=1e-2, ISP =2, SP=['BP5', 'LP3'], DS='-')
+
+
+#l1=run('MePDv4', ICP=['cil', 'STA'],UZSTOP = {'cli': 100},PAR = {'cil':0, 'cli':20, 'Kp':2.3, 'beta1':0}, U={1:0.4986, 2:0.4998, 3:0.4997},NMX=16000,NPR=16000)
+#l2=run(l1('HB1'),IPS=2,NMX=2000,NPR=40000,ICP=['cil','PERIOD',9],DS=0.001,DSMAX=0.1)
+
+#HB1.writeRawFilename('HB1.dat') 
+#HB2.writeRawFilename('HB2.dat') 
+#LP1v1.writeRawFilename('LP1v1.dat')
+#HOM1.writeRawFilename('HOM1.dat')
+#HOM2.writeRawFilename('HOM2.dat')
+#HOM3.writeRawFilename('HOM3.dat')
+#HOM4.writeRawFilename('HOM4.dat')
+
+#l1.writeRawFilename('EQ.dat')
+#l2.writeRawFilename('PO.dat')
+
+
+# glut antag 
+
+#r1=run('MePDv4', UZSTOP = {'Kp': 20})
+
+#HB1=run(r1('HB1'),ISW=2,ICP=['Kp','beta2'],NMX=10000,NPR=1000,DSMAX=1e-2, UZSTOP = {'beta2': [-7,2.0],'Kp': [-10.0,30]})
+
+#LP1v1=run(r1('LP1'),ISW=2,ICP=['Kp','beta2'],NMX=10000,NPR=1000,DSMAX=1e-2, UZSTOP = {'beta2': [0,2.0],'Kp': [-0.0,30]})
+
+
+#HB1.writeRawFilename('HB1.dat') 
+#LP1v1.writeRawFilename('LP1v1.dat')
+
+
+# cll & cli
+
+#p1=run('MePDv4', ICP=['cll', 'HBF', 'FLD', 'STA'],UZSTOP = {'cll': 80},PAR = {'Kp':2.3, 'cll':0}, U={1:0.0533, 2:0.0047, 3:0.0315},NMX=500000,NPR=20000)
+#p2=run(p1('HB1'),IPS=2,NMX=6000,NPR=40,ICP=['cll','PERIOD'],DS=0.0001,DSMAX=0.1)
+#HB1=run(p1('HB1'),ISW=2,ICP=['cll','cli'],NMX=10000,NPR=10000,DSMAX=1e-2,  UZSTOP = {'cli': [0,70.0],'cll': [0.0,70]})
+#HB2=run(p1('HB1'),ISW=2,ICP=['cll','cli'],NMX=10000,NPR=10000,DSMAX=1e-2,  UZSTOP = {'cli': [0,70.0],'cll': [0.0,70]}, DS='-')
+
+
+#LP1v1=run(p1('LP1'),ISW=2,ICP=['cll','cli'],NMX=10000,NPR=2000,DSMAX=1e-2,UZSTOP = {'cli': [0,75.0],'cll': [0.0,75]},DS='-')
+
+
+#g1=run('MePDv4', ICP=['cli', 'STA'],UZSTOP = {'cli': 60},PAR = {'Kp':2.3, 'cll':18, 'cli':0}, U={1:0.4986, 2:0.00035633, 3:0.4998},NMX=500000,NPR=20000)
+#g2=run(g1('HB1'),IPS=2,NMX=480,NPR=20,ICP=['cli','PERIOD'],DS=0.0001,DSMAX=0.1)
+
+
+#HB1.writeRawFilename('HB1.dat') 
+#HB2.writeRawFilename('HB2.dat') 
+#LP1v1.writeRawFilename('LP1v1.dat')
+#LP1v2.writeRawFilename('LP1v2.dat')
+
+
+#g1.writeRawFilename('EQ.dat')
+#g2.writeRawFilename('PO.dat')
+
+
+
+
+

@@ -1,3 +1,4 @@
+% Code to produce figure 2 
 clearvars
 close all
 load('rainbow_cmap.mat')
@@ -93,7 +94,7 @@ text(HB(1,1),HB(1,2)-0.01, ' HB', 'FontSize', 9, 'fontweight', 'bold', 'Horizont
 yticks([0 0.1 0.2 0.3 0.4 0.5])
 xlim([0 14])
 ylim([-0.01 0.51])
-xlabel('Excitatory input')
+xlabel('MePD excitation')
 ylabel('Glu population activity')
 xticks([0 2 6 10 14 18 23])
 title('a')
@@ -113,7 +114,7 @@ yticks([0 0.1 0.2 0.3 0.4 0.5])
 xticks([0 2 6 10 14])
 xlim([0 14])
 ylim([-0.01 0.51 ])
-xlabel('Excitatory input')
+xlabel('MePD excitation')
 ylabel('GABA_{int} population activity')
 title('b')
 hold off
@@ -133,7 +134,7 @@ yticks([0 0.1 0.2 0.3 0.4 0.5])
 xlim([0 14])
 ylim([-0.01 0.51])
 xticks([0 2 6 10 14 18 22])
-xlabel('Excitatory input')
+xlabel('MePD excitation')
 ylabel('GABA_{eff} population activity')
 title('c')
 
@@ -184,7 +185,7 @@ axes ('Units', 'centimeters','Position',[12.5 7.2 4 3.5]);
 hold on;  box on; grid off;
 set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'fontweight', 'bold');
 plot(KpLCr2(:,1),KpLCr2(:,6)/0.05, 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
-xlabel('Excitatory input')
+xlabel('MePD excitation')
 xlim([0.75 14])
 ylim([1 120])
 ylabel('        Period (s)')
@@ -222,6 +223,7 @@ plot(HB1(:,1), HB1(:,6), 'Color',colour.red,'LineStyle','-','LineWidth',1.5)
 plot(LP1v1(:,1), LP1v1(:,6), 'Color',colour.green,'LineStyle','-','LineWidth',1.5)
 plot(HOM1(:,1), HOM1(:,6), 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
 plot(HOM2(:,1), HOM2(:,6), 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
+% location of special points
 plot(HB1(end,1),HB1(end,6),'o','MarkerFaceColor', 'k','MarkerEdgeColor','black', 'MarkerSize', 4,'LineWidth',0.7)
 text(HB1(end,1),HB1(end,6), 'BT', 'FontSize', 9, 'FontWeight','bold','VerticalAlignment','bottom');
 text(3,0.77, 'HB', 'FontSize', 9, 'FontWeight','bold')
@@ -231,7 +233,7 @@ text(16,0.935, 'HC', 'FontSize', 9, 'FontWeight','bold')
 rectangle('Position', [0, 0.7, 20.5,0.3], 'EdgeColor', 'k', 'LineWidth', 0.8);
 ylim([0.7 1.0])
 xlim([0 20.5])
-xlabel('Excitatory input')
+xlabel('MePD excitation')
 ylabel('Relative Glu excitation ratio')
 title('g')
 saveas(f,'fig2.svg', 'svg')

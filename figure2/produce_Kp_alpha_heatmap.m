@@ -1,3 +1,5 @@
+% Script to find mean output from the MePD on 
+% the Kp x \alpha parameter space
 clearvars; clc;
 load("par.mat")
 par.d=0.05;
@@ -20,7 +22,7 @@ X2=0:0.05:0.5;
 [Gl, Gi] = meshgrid(X1,X2);
 gridpts=[Gl(:), Gi(:)];
 
-% loop over the parameter space
+% Loop over the parameter space
 for i =1:length(A)
     for j = 1:length(B)
         display([i,j])
@@ -34,6 +36,7 @@ for i =1:length(A)
             [T, Y]=ode45(@MePD_sys,time_vector,newIC,opts, par);
             out.amplitude(i,j) = max(Y(:,1))-min(Y(:,1));
             if out.amplitude(i,j)>0.01
+                % Normalise
                 out.put(i,j,1) = Y(end,4)/time_vector(end);
                 out.put(i,j,2) = Y(end,6)/time_vector(end);
                 break

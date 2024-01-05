@@ -1,3 +1,4 @@
+% Code to produce supplementary figure to figure 2
 clearvars
 close all
 load("colour.mat")
@@ -92,7 +93,7 @@ plot(HB(1,1), HB(1,2),'o','MarkerFaceColor','k','MarkerEdgeColor','black', 'Mark
 plot(KpLCr2(end,1),KpLCr2(end,3),'o','MarkerFaceColor','k','MarkerEdgeColor','black', 'MarkerSize', 4,'LineWidth',1.5)
 xlim([0 22])
 ylim([-0.01 0.51])
-xlabel('Excitatory input')
+xlabel('MePD excitation')
 ylabel('Glu population activity')
 title('a')
 xticks([0 2 6 10 14 18 22])
@@ -117,7 +118,7 @@ plot(KpLCr2(end,1),KpLCr2(end,5),'o','MarkerFaceColor','k','MarkerEdgeColor','bl
 xlim([0 22])
 ylim([-0.01 0.51])
 xticks([0 2 6 10 14 18 22])
-xlabel('Excitatory input')
+xlabel('MePD excitation')
 ylabel('GABA_{eff} population activity')
 text(HB(1,1)+1,HB(1,4), ' HB', 'FontSize' , 9.5, 'HorizontalAlignment','left', 'Rotation',-90, 'FontWeight','bold');
 text(KpLCr2(end,1),KpLCr2(end,5)+0.005, ' HC ', 'FontSize' , 9.5, 'HorizontalAlignment','right', 'FontWeight','bold');
@@ -132,7 +133,7 @@ axes ('Units', 'centimeters','Position',[4.5 1 6 4.5]);
 hold on; box on; 
 set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'fontweight', 'bold');
 plot(KpLCr2(:,1),log(KpLCr2(:,6)/0.05), 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
-xlabel('Excitatory input')
+xlabel('MePD excitation')
 ylim([2 19])
 ylabel('        log(Period (s))')
 title('c')

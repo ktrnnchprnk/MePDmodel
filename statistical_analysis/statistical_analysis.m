@@ -1,7 +1,7 @@
 clearvars; clc;
 num_data = readmatrix("data_mod.csv");
 Mean = mean(num_data, 'omitnan');
-sd_data = std(num_data,'omitnan')/sqrt(size(num_data,1));
+sd_data = std(num_data,'omitnan');
 
 % Statistical analysis for 2 Hz stimulation
 data1 =  num_data(:,5);

@@ -10,6 +10,7 @@ load('KpLCr2.dat')
 
 % Hopf bifurcations
 load('HB1.dat')
+load('HB2.dat')
 % limit points
 load('LP1v1.dat')
 
@@ -87,7 +88,7 @@ Base=2.3;
 Stim=6;
 T1 = find(round(KpLCr2(:,1),1)==Base,1);
 T2 = find(round(KpLCr2(:,1),1)==Stim,1);
-plot(KpLCr2(T1,1),KpLCr2(T1,3),'^','MarkerFaceColor',colour.green,'MarkerEdgeColor',colour.green, 'MarkerSize', 4,'LineWidth',1.5)
+plot(KpLCr2(T1,1),KpLCr2(T1,3),'^','MarkerFaceColor',colour.yellow,'MarkerEdgeColor',colour.yellow, 'MarkerSize', 4,'LineWidth',1.5)
 plot(KpLCr2(T2,1),KpLCr2(T2,3),'^','MarkerFaceColor',colour.blue,'MarkerEdgeColor',colour.blue, 'MarkerSize', 4,'LineWidth',1.5)
 plot(HB(:,1), HB(:,2),'o','MarkerFaceColor','k','MarkerEdgeColor','black', 'MarkerSize', 4,'LineWidth',1.5)
 text(HB(1,1),HB(1,2)-0.01, ' HB', 'FontSize', 9, 'fontweight', 'bold', 'HorizontalAlignment', 'left');
@@ -106,7 +107,7 @@ set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'fontweight', 'bold', 'font
 plot(Stable(:,1), Stable(:,3), 'Color','k','LineStyle','-','LineWidth',1.5)
 plot(Unstable(:,1), Unstable(:,3), 'Color','k','LineStyle','--','LineWidth',1.5)
 plot(KpLCr2(:,1),KpLCr2(:,4),'Color',colour.red,'LineWidth',1.5)
-plot(KpLCr2(T1,1),KpLCr2(T1,4),'^','MarkerFaceColor',colour.green,'MarkerEdgeColor',colour.green, 'MarkerSize', 4,'LineWidth',1.5)
+plot(KpLCr2(T1,1),KpLCr2(T1,4),'^','MarkerFaceColor',colour.yellow,'MarkerEdgeColor',colour.yellow, 'MarkerSize', 4,'LineWidth',1.5)
 plot(KpLCr2(T2,1),KpLCr2(T2,4),'^','MarkerFaceColor',colour.blue,'MarkerEdgeColor',colour.blue, 'MarkerSize', 4,'LineWidth',1.5)
 plot(HB(:,1), HB(:,3),'o','MarkerFaceColor','k','MarkerEdgeColor','black', 'MarkerSize', 4,'LineWidth',1.5)
 text(HB(1,1),HB(1,3), ' HB', 'FontSize', 9, 'fontweight', 'bold', 'HorizontalAlignment', 'left');
@@ -126,7 +127,7 @@ set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'fontweight', 'bold', 'font
 plot(Stable(:,1), Stable(:,4), 'Color','k','LineStyle','-','LineWidth',1.5)
 plot(Unstable(:,1), Unstable(:,4), 'Color','k','LineStyle','--','LineWidth',1.5)
 plot(KpLCr2(:,1),KpLCr2(:,5),'Color',colour.red,'LineWidth',1.5)
-plot(KpLCr2(T1,1),KpLCr2(T1,5),'^','MarkerFaceColor',colour.green,'MarkerEdgeColor',colour.green, 'MarkerSize', 4,'LineWidth',1.5)
+plot(KpLCr2(T1,1),KpLCr2(T1,5),'^','MarkerFaceColor',colour.yellow,'MarkerEdgeColor',colour.yellow, 'MarkerSize', 4,'LineWidth',1.5)
 plot(KpLCr2(T2,1),KpLCr2(T2,5),'^','MarkerFaceColor',colour.blue,'MarkerEdgeColor',colour.blue, 'MarkerSize', 4,'LineWidth',1.5)
 plot(HB(:,1), HB(:,4),'o','MarkerFaceColor','k','MarkerEdgeColor','black', 'MarkerSize', 4,'LineWidth',1.5)
 text(HB(1,1),HB(1,4)-0.01, ' HB', 'FontSize', 9, 'fontweight', 'bold', 'HorizontalAlignment', 'left');
@@ -170,7 +171,7 @@ set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'fontweight', 'bold');
 plot(T, Y(:,1),'Color',colour.green,'LineStyle','-','LineWidth',1.5 )
 plot(T, Y(:,3),'Color',colour.red,'LineStyle','-','LineWidth',1.5 )
 
-plot(15,0.45,'^','MarkerFaceColor',colour.green,'MarkerEdgeColor',colour.green, 'MarkerSize', 4,'LineWidth',1.5)
+plot(15,0.45,'^','MarkerFaceColor',colour.yellow,'MarkerEdgeColor',colour.yellow, 'MarkerSize', 4,'LineWidth',1.5)
 
 ylabel('Averaged Activity','fontname' , 'Arial', 'fontweight', 'bold')
 xlabel('Time (s)','fontname' , 'Arial', 'fontweight', 'bold')
@@ -184,7 +185,7 @@ hold off
 axes ('Units', 'centimeters','Position',[12.5 7.2 4 3.5]);
 hold on;  box on; grid off;
 set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'fontweight', 'bold');
-plot(KpLCr2(:,1),KpLCr2(:,6)/0.05, 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
+plot(KpLCr2(:,1),KpLCr2(:,6)*60, 'Color','k','LineStyle','-','LineWidth',1.5) % multiply by 60 to convert period in seconds
 xlabel('MePD excitation')
 xlim([0.75 14])
 ylim([1 120])
@@ -192,7 +193,7 @@ ylabel('        Period (s)')
 title('f')
 hold off 
 
-% % homoclinic orbit at K_p = 6
+% % oscillations orbit at K_p = 6
 axes ('Units', 'centimeters','Position',[7 7.2 4 3.5])
 hold on; box on; 
 set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'fontweight', 'bold');
@@ -213,13 +214,13 @@ set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'FontWeight', 'bold');
 pluto = (out.put(:,:,1)'-out.put(:,:,2)');
 image( A , B , pluto,'CDataMapping','scaled')
 clim([-max(abs(pluto(:))), max(abs(pluto(:)))]);
-rainbowColormap((length(rainbowColormap)+1)/2,:) = [1;1;1];
-colormap(gca, flip(rainbowColormap));
+colormap(gca, (rainbowColormap));
 bar = colorbar;
 bar.Label.String = 'Mean MePD output';
 bar.Location='eastoutside';
 bar.FontSize = 9.5;
 plot(HB1(:,1), HB1(:,6), 'Color',colour.red,'LineStyle','-','LineWidth',1.5)
+plot(HB2(:,1), HB2(:,6), 'Color',colour.red,'LineStyle','-','LineWidth',1.5)
 plot(LP1v1(:,1), LP1v1(:,6), 'Color',colour.green,'LineStyle','-','LineWidth',1.5)
 plot(HOM1(:,1), HOM1(:,6), 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
 plot(HOM2(:,1), HOM2(:,6), 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)

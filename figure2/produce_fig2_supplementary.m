@@ -132,7 +132,7 @@ hold off
 axes ('Units', 'centimeters','Position',[4.5 1 6 4.5]);
 hold on; box on; 
 set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'fontweight', 'bold');
-plot(KpLCr2(:,1),log(KpLCr2(:,6)/0.05), 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
+plot(KpLCr2(:,1),log(KpLCr2(:,6)*60), 'Color','k','LineStyle','-','LineWidth',1.5)
 xlabel('MePD excitation')
 ylim([2 19])
 ylabel('        log(Period (s))')
@@ -141,3 +141,4 @@ hold off
 
 
 saveas(f,'fig2supp.svg', 'svg')
+saveas(f,'fig2supp.eps', 'eps')

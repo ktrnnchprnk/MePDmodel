@@ -1,0 +1,23 @@
+# cll & cli
+
+p1=run('MePDv4', ICP=['cll', 'HBF', 'FLD', 'STA'],UZSTOP = {'cll': 80},PAR = {'Kp':2.3, 'cll':0}, U={1:0.0533, 2:0.0047, 3:0.0315},NMX=500000,NPR=20000)
+p2=run(p1('HB1'),IPS=2,NMX=6000,NPR=40,ICP=['cll','PERIOD'],DS=0.0001,DSMAX=0.1)
+HB1=run(p1('HB1'),ISW=2,ICP=['cll','cli'],NMX=10000,NPR=10000,DSMAX=1e-2,  UZSTOP = {'cli': [0,70.0],'cll': [0.0,70]})
+HB2=run(p1('HB1'),ISW=2,ICP=['cll','cli'],NMX=100000,NPR=100000,DSMAX=1e-2,  UZSTOP = {'cli': [0,70.0],'cll': [0.0,70]}, DS='-')
+
+
+LP1v1=run(p1('LP1'),ISW=2,ICP=['cll','cli'],NMX=10000,NPR=2000,DSMAX=1e-2,UZSTOP = {'cli': [0,75.0],'cll': [0.0,75]},DS='-')
+
+
+g1=run('MePDv4', ICP=['cli', 'STA'],UZSTOP = {'cli': 60},PAR = {'Kp':2.3, 'cll':18, 'cli':0}, U={1:0.4986, 2:0.00035633, 3:0.4998},NMX=500000,NPR=20000)
+g2=run(g1('HB1'),IPS=2,NMX=480,NPR=20,ICP=['cli','PERIOD'],DS=0.0001,DSMAX=0.1)
+
+
+HB1.writeRawFilename('HB1.dat') 
+HB2.writeRawFilename('HB2.dat') 
+LP1v1.writeRawFilename('LP1v1.dat')
+
+
+g1.writeRawFilename('EQ.dat')
+g2.writeRawFilename('PO.dat')
+

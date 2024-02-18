@@ -1,0 +1,13 @@
+#r1=run('kndymepdsys2',NMX=   100000, NPR=  5000, DSMIN=1e-07,DSMAX= 0.1)
+#r2=run(r1('HB1'),IPS=2,NMX=30000,NPR=5000,ICP=['I0','PERIOD'],DSMAX=0.1,UZSTOP = {'I0': 0.14}, SP=['BP3', 'LP9'])
+#r3=run(r2,IRS=18,IPS=2,ICP=['Kp','PERIOD'],NMX=900000,NPR=10000,DS=0.01,DSMAX=0.1, DSMIN=1e-6,UZSTOP = {'Kp': [-100, 8.6]},SP=['BP0', 'LP3'], ILP=1)
+
+
+#r3.writeRawFilename('PeriodBoth.dat') 
+
+s1=run('MePDv5', UZSTOP = {'Kp': 30})
+s2=run(s1('HB1'),IPS=2,ICP=['Kp','PERIOD', 'MINGl', 'MINGe'],DSMAX=0.01)
+
+s1.writeRawFilename('glutr1.dat') 
+s2.writeRawFilename('glutr2.dat') 
+

@@ -77,7 +77,7 @@ pluto =   out.put1(:,:,2);
 pluto = pluto';
 
 image( A , B , pluto,'CDataMapping','scaled')
-colormap(gca, turbo);
+colormap(gca, "jet");
 
 colormap(gca, "jet");
 plot([0 14], [20 20], 'Color','k','LineStyle',':','LineWidth',2)
@@ -103,12 +103,11 @@ h=1e-2;
 pluto =  out.put1(:,:,1)-out.put1(:,:,2);
 pluto = pluto';
 rainbowColormap2=rainbowColormap;
-rainbowColormap2((length(rainbowColormap2)-1)/2,:)=[1,1,1];
 image( A , B , pluto,'CDataMapping','scaled')
-colormap(gca, turbo);
+colormap(gca, "jet");
 clim([-max(abs(pluto(:))), max(abs(pluto(:)))]);
 plot([0 14], [20 20], 'Color','k','LineStyle',':','LineWidth',2)
-colormap(gca, flip(rainbowColormap2));
+colormap(gca, (rainbowColormap2));
 
 xlabel('MePD excitation')
 ylabel('GABA_{int} \rightarrow GABA_{eff}')

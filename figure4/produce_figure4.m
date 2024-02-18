@@ -9,6 +9,7 @@ load('rainbow_cmap.mat')
 % Hopf curves
 load('HB1.dat')
 load('HB2.dat')
+load('HB3.dat')
 % limit points
 load('LP1v1.dat')
 
@@ -123,8 +124,7 @@ set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'FontWeight','bold');
 pluto = (out.put(:,:,1)'-out.put(:,:,2)');
 image( A , B , pluto,'CDataMapping','scaled')
 clim([-max(abs(pluto(:))), max(abs(pluto(:)))]);
-rainbowColormap((length(rainbowColormap)+1)/2,:) = [1;1;1];
-colormap(gca, flip(rainbowColormap));
+colormap(gca, (rainbowColormap));
 bar = colorbar;
 bar.Label.String = 'Mean MePD output';
 bar.FontSize = 10;
@@ -132,15 +132,19 @@ bar.Location='southoutside';
 
 plot(HB1(:,1), HB1(:,6), 'Color',colour.red,'LineStyle','-','LineWidth',1.5)
 plot(HB2(:,1), HB2(:,6), 'Color',colour.red,'LineStyle','-','LineWidth',1.5)
+plot(HB3(:,1), HB3(:,6), 'Color',colour.red,'LineStyle','-','LineWidth',1.5)
+
 
 plot(LP1v1(:,1), LP1v1(:,6), 'Color',colour.green,'LineStyle','-','LineWidth',1.5)
 
 plot(HOM1(:,1), HOM1(:,6), 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
 plot(HOM2(:,1), HOM2(:,6), 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
-plot(HOM3(:,1), HOM3(:,6), 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
-plot(HOM4(:,1), HOM4(:,6), 'Color',colour.purple,'LineStyle','-','LineWidth',1.5)
+plot(HOM2(350:end,1), HOM2(350:end,6), 'Color','k','LineStyle','-','LineWidth',1.5)
+plot(HOM3(:,1), HOM3(:,6), 'Color','k','LineStyle','-','LineWidth',1.5)
+plot(HOM4(:,1), HOM4(:,6), 'Color','k','LineStyle','-','LineWidth',1.5)
 
 plot(LP1v1(3138,1), LP1v1(3138,6),'o','MarkerFaceColor', 'k','MarkerEdgeColor','black', 'MarkerSize', 4,'LineWidth',0.7)
+plot(HOM2(350,1), HOM2(350,6),'o','MarkerFaceColor', 'k','MarkerEdgeColor','black', 'MarkerSize', 4,'LineWidth',0.7)
 plot(HB1(end,1),HB1(end,6),'o','MarkerFaceColor', 'k','MarkerEdgeColor','black', 'MarkerSize', 4,'LineWidth',0.7)
 plot(HB2(end,1),HB2(end,6),'o','MarkerFaceColor', 'k','MarkerEdgeColor','black', 'MarkerSize', 4,'LineWidth',0.7)
 
@@ -157,6 +161,8 @@ rectangle('Position', [0, 0, 40,40], 'EdgeColor', 'k', 'LineWidth', 0.8);
 text(LP1v1(3138,1)-1, LP1v1(3138,6), 'CP', 'FontSize', 9, 'FontWeight','bold','VerticalAlignment','top')
 text(HB1(end,1),HB1(end,6), 'BT ', 'FontSize', 9, 'FontWeight','bold','HorizontalAlignment','right')
 text(HB2(end,1),HB2(end,6), 'BT ', 'FontSize', 9, 'FontWeight','bold','HorizontalAlignment','right')
+text(HOM2(350,1)-0.3, HOM2(350,6)-5, 'SNIC', 'FontSize', 9, 'FontWeight','bold','VerticalAlignment','top', 'Rotation',90)
+text(HOM2(350,1)+0.3, HOM2(350,6)+2, 'SNL', 'FontSize', 9, 'FontWeight','bold','VerticalAlignment','top')
 
 
 ylim([0 40])
@@ -245,8 +251,7 @@ set ( gca , 'FontSize' , 9.5 , 'fontname' , 'Arial', 'FontWeight','bold');
 pluto = (out.put(:,:,1)-out.put(:,:,2));
 image( A , B , pluto,'CDataMapping','scaled')
 clim([-max(abs(pluto(:))), max(abs(pluto(:)))]);
-rainbowColormap((length(rainbowColormap)+1)/2,:) = [1;1;1];
-colormap(gca, flip(rainbowColormap));
+colormap(gca, (rainbowColormap));
 bar = colorbar;
 bar.Label.String = 'Mean MePD output';
 bar.FontSize = 10;

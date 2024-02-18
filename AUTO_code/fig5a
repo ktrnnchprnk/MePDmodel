@@ -1,0 +1,60 @@
+r1=run('MePDv4',UZSTOP = {'beta1': [-2,2.0],'Kp': [-10.0,30]})
+
+# Hopf curves
+HB1=run(r1('HB1'),ISW=2,ICP=['Kp','beta1'],NMX=10000,NPR=100,DSMAX=1e-2, DS='-', UZSTOP = {'beta1': [-2,2.0],'Kp': [-10.0,15]})
+HB2=run(r1('HB1'),ISW=2,ICP=['Kp','beta1'],NMX=10000,NPR=1000,DSMAX=1e-2, UZSTOP = {'beta1': [-7,2.0],'Kp': [-10.0,30]})
+
+## LP points
+LP1v1=run(r1('LP1'),ISW=2,ICP=['Kp','beta1'],NMX=5500,NPR=1000,DSMAX=1e-2,DS='-',UZSTOP = {'Kp': 20.0, 'beta1':1})
+LP1v2=run(r1('LP1'),ISW=2,ICP=['Kp','beta1'],NMX=5500,NPR=1000,DSMAX=1e-2,UZSTOP = {'Kp': 40.0, 'beta1':1})
+r2=run('MePDv4', UZSTOP = {'Kp': 20}, PAR = {'beta1': 0.45})
+LP2v1=run(r2('LP4'),ISW=2,ICP=['Kp','beta1'],NMX=4500,NPR=1000,DSMAX=1e-2,UZSTOP = {'beta1': 2.0,'Kp': 40.0})
+LP2v2=run(r2('LP4'),ISW=2,ICP=['Kp','beta1'],NMX=4500,NPR=1000,DSMAX=1e-2,UZSTOP = {'beta1': 1.0,'Kp': 40.0}, DS='-')
+
+
+#Homoclinic on the right 
+c1=run('MePDv4', PAR = {'beta1':0.20}, UZSTOP = {'Kp':[-5,30]}, NPR=4000)
+
+c2=run(c1('HB1'),IPS=2,ICP=['Kp','PERIOD'],UZSTOP = {'Kp':[-5,25]},NMX=185, DSMAX=0.1,NTST=140)
+
+HOM1=run(c2,IRS=6,IPS=9,ICP=['Kp','beta1', 'PERIOD'],NMX=12500,NPR=2000,DSMAX=1e-3, ISP =2,UZSTOP = {'beta1':[0,0.7936]}, SP=['BP5'], DS = '-')
+
+
+
+# Homoclinic on the left 
+
+c1=run('MePDv4', PAR = {'beta1':0.0}, UZSTOP = {'Kp':[-5,30]}, NPR=4000)
+c2=run(c1('HB1'),IPS=2,ICP=['Kp','PERIOD'],UZSTOP = {'Kp':[-5,3]},NMX=165, DSMAX=0.1)
+c3=run(c2,IRS=6,IPS=2,ICP=['beta1','PERIOD'],NMX=2000,NPR=3000,DSMAX=1e-3,UZSTOP = {'beta1':[-1,0.6]})
+c4backwards=run(c3,IRS=7,IPS=2,ICP=['Kp','PERIOD'],NMX=242, NPR=2000,DSMAX=1e-2,UZSTOP = {'Kp':[-1,10]}, ISP =2, DS='-',NTST=150)
+HOM2=run(c4backwards,IRS=8,IPS=9,ICP=['Kp','beta1', 'PERIOD'],NMX=250,NPR=50,DSMAX=1e-2, ISP =2,UZSTOP = {'beta1':[0,0.89]}, SP=['BP3', 'LP3'])
+
+c4backwards2=run(c3,IRS=7,IPS=2,ICP=['Kp','PERIOD'],NMX=242, NPR=2000,DSMAX=1e-2,UZSTOP = {'Kp':[-1,10]}, ISP =2, DS='-',NTST=150)
+HOM3=run(c4backwards2,IRS=8,IPS=9,ICP=['Kp','beta1', 'PERIOD'],NMX=25000,NPR=5,DSMAX=1e-2, ISP =2,UZSTOP = {'beta1':[0,0.89]}, SP=['BP0', 'LP1'], DS='-')
+
+c33=run(c2,IRS=6,IPS=2,ICP=['beta1','PERIOD'],NMX=2000,NPR=3000,DSMAX=1e-3,UZSTOP = {'beta1':[-1,0.49]})
+c4backwards3=run(c33,IRS=7,IPS=2,ICP=['Kp','PERIOD'],NMX=240, NPR=2000,DSMAX=1e-2,UZSTOP = {'Kp':[-1,10]}, ISP =2, DS='-',NTST=130)
+HOM4=run(c4backwards3,IRS=8,IPS=9,ICP=['Kp','beta1', 'PERIOD'],NMX=25000,NPR=50,DSMAX=1e-2, ISP =2,UZSTOP = {'beta1':[0,0.89]}, SP=['BP5', 'LP6'], DS='-')
+
+
+
+
+
+
+#plot HB1+HB2+LP1v1+LP1v2+LP2v1+LP2v2+HOM2+HOM3+HOM4+HOM1
+
+
+
+HB1.writeRawFilename('HB1.dat') 
+HB2.writeRawFilename('HB2.dat')
+LP1v1.writeRawFilename('LP1v1.dat')
+LP2v1.writeRawFilename('LP2v1.dat')
+LP2v2.writeRawFilename('LP2v2.dat')
+LP1v2.writeRawFilename('LP1v2.dat')
+HOM1.writeRawFilename('HOM1.dat')
+HOM2.writeRawFilename('HOM2.dat')
+HOM3.writeRawFilename('HOM3.dat')
+HOM4.writeRawFilename('HOM4.dat')
+
+
+

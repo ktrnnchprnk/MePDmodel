@@ -36,9 +36,9 @@
       Fl=(1-beta2)*cll*Gl-(1-beta1)*cil*Gi+Kp*alpha
       Fi=(1-beta2)*cli*Gl+Kp*(1-alpha)
       Fe=(1-beta2)*cle*Gl-(1-beta1)*cie*Gi
-      F(1) = -Gl + (1-1*Gl)*(1/(1+exp(-ae*(Fl-thetae)))-1/(1+exp(ae*thetae)))
-      F(2) = -Gi + (1-1*Gi)*(1/(1+exp(-ai*(Fi-thetai)))-1/(1+exp(ai*thetai)))
-      F(3) = -Ge + (1-1*Ge)*(1/(1+exp(-ai*(Fe-thetai)))-1/(1+exp(ai*thetai)))
+      F(1) = 3*(-Gl + (1-1*Gl)*(1/(1+exp(-ae*(Fl-thetae)))-1/(1+exp(ae*thetae))))
+      F(2) = 3*(-Gi + (1-1*Gi)*(1/(1+exp(-ai*(Fi-thetai)))-1/(1+exp(ai*thetai))))
+      F(3) = 3*(-Ge + (1-1*Ge)*(1/(1+exp(-ai*(Fe-thetai)))-1/(1+exp(ai*thetai))))
       
       
       END SUBROUTINE FUNC

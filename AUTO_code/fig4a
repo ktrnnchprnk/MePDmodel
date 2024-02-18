@@ -1,0 +1,51 @@
+#cli cil 
+
+
+g1=run('MePDv4', ICP=['cli', 'STA'],UZSTOP = {'cli': 0}, PAR = {'cil':40, 'cli':40, 'Kp':2.3, 'beta1':0}, U={1:0.0428, 2:0.0276, 3:0.0041},NMX=5000,NPR=500,DS='-')
+HB1=run(g1('HB1'),ISW=2,ICP=['cil','cli'],NMX=100000,NPR=100000,DSMAX=1e-2,  UZSTOP = {'cli': [0,50.0],'cil': [0.0,50]})
+g1=run('MePDv4', ICP=['cli', 'STA'],UZSTOP = {'cli': 0}, PAR = {'cil':20, 'cli':30, 'Kp':2.3, 'beta1':0}, U={1:0.0712, 2:0.0604, 3:0.0081},NMX=50000,NPR=5000,DS='-')
+HB2=run(g1('HB2'),ISW=2,ICP=['cil','cli'],NMX=10000,NPR=10000,DSMAX=1e-2,  UZSTOP = {'cli': [0,50.0],'cil': [0.0,50]})
+HB3=run(g1('HB2'),ISW=2,ICP=['cil','cli'],NMX=10000,NPR=10000,DSMAX=1e-2,  UZSTOP = {'cli': [0,50.0],'cil': [0.0,50]}, DS='-')
+
+
+l1=run('MePDv4', ICP=['cil', 'STA'],UZSTOP = {'cli': 100},PAR = {'cil':0, 'cli':40, 'Kp':2.3, 'beta1':0}, U={1:0.4986, 2:0.4998, 3:0.4997},NMX=16000,NPR=16000)
+LP1v1=run(l1('LP2'),ISW=2,ICP=['cil','cli'],NMX=7000,NPR=2000,DSMAX=1e-2,UZSTOP = {'cli': [0,45.0],'cil': [0.0,45]})#CP:3138
+
+
+l1=run('MePDv4', ICP=['cil', 'STA'],UZSTOP = {'cli': 100},PAR = {'cil':0, 'cli':20, 'Kp':2.3, 'beta1':0}, U={1:0.4986, 2:0.4998, 3:0.4997},NMX=16000,NPR=16000)
+l2=run(l1('HB1'),IPS=2,NMX=295,NPR=40000,ICP=['cil','PERIOD'],DS=0.001,DSMAX=0.1, NTST=140)
+HOM1=run(l2,IRS=6,IPS=9,ICP=['cil','cli', 'PERIOD'],NMX=30000,NPR=200,DSMAX=1e-2, ISP =2, SP=['BP0', 'LP0'], DS='-')
+
+
+
+l1=run('MePDv4', ICP=['cil', 'STA'],UZSTOP = {'cli': 100},PAR = {'cil':0, 'cli':20, 'Kp':2.3, 'beta1':0}, U={1:0.4986, 2:0.4998, 3:0.4997},NMX=16000,NPR=16000)
+l2=run(l1('HB1'),IPS=2,NMX=300,NPR=40000,ICP=['cil','PERIOD'],DS=0.001,DSMAX=0.1, NTST=150)
+
+HOM2=run(l2,IRS=6,IPS=9,ICP=['cil','cli', 'PERIOD'],NMX=30000,NPR=200,DSMAX=1e-2, ISP =2, SP=['BP2', 'LP3'])
+
+l1=run('MePDv4', ICP=['cil', 'STA'],UZSTOP = {'cli': 100},PAR = {'cil':0, 'cli':17, 'Kp':2.3, 'beta1':0}, U={1:0.4986, 2:0.4998, 3:0.4997},NMX=16000,NPR=16000)
+l2=run(l1('HB1'),IPS=2,NMX=520,NPR=40000,ICP=['cil','PERIOD'],DS=0.001,DSMAX=0.1,UZSTOP = {'cil': 16})
+l3=run(l2,IRS=6,IPS=2,NMX=1000,NPR=100,ICP=['cli','PERIOD'],DS='-',DSMAX=0.1,UZSTOP = {'cli': 12})
+l4=run(l3, IRS=7,IPS=2,NMX=100,NPR=1000,ICP=['cil','PERIOD'],DSMAX=0.1, NTST=130)
+
+HOM3=run(l4,IRS=8,IPS=9,ICP=['cil','cli', 'PERIOD'],NMX=400,NPR=200,DSMAX=1e-2, ISP =2, SP=['BP3', 'LP3'])
+
+
+l3=run(l2,IRS=6,IPS=2,NMX=1000,NPR=100,ICP=['cli','PERIOD'],DS='-',DSMAX=0.1,UZSTOP = {'cli': 12})
+l4=run(l3, IRS=7,IPS=2,NMX=93,NPR=1000,ICP=['cil','PERIOD'],DSMAX=0.1, NTST=130)
+
+HOM4=run(l4,IRS=8,IPS=9,ICP=['cil','cli', 'PERIOD'],NMX=30000,NPR=25,DSMAX=1e-2, ISP =2, SP=['BP0', 'LP0'], DS='-')
+
+l1=run('MePDv4', ICP=['cil', 'STA'],UZSTOP = {'cli': 100},PAR = {'cil':0, 'cli':20, 'Kp':2.3, 'beta1':0}, U={1:0.4986, 2:0.4998, 3:0.4997},NMX=16000,NPR=16000)
+l2=run(l1('HB1'),IPS=2,NMX=2000,NPR=40000,ICP=['cil','PERIOD',9],DS=0.001,DSMAX=0.1)
+
+HB1.writeRawFilename('HB1.dat') 
+HB2.writeRawFilename('HB2.dat') 
+HB3.writeRawFilename('HB3.dat') 
+LP1v1.writeRawFilename('LP1v1.dat')
+HOM1.writeRawFilename('HOM1.dat')
+HOM2.writeRawFilename('HOM2.dat')
+HOM3.writeRawFilename('HOM3.dat')
+HOM4.writeRawFilename('HOM4.dat')
+l1.writeRawFilename('EQ.dat')
+l2.writeRawFilename('PO.dat')

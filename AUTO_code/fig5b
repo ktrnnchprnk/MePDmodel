@@ -1,0 +1,7 @@
+
+r1=run('MePDv4', UZSTOP = {'Kp': 20})
+
+HB1=run(r1('HB1'),ISW=2,ICP=['Kp','beta2'],NMX=100000,NPR=10000,DSMAX=1e-2, UZSTOP = {'beta2': [-7,2.0],'Kp': [-10.0,30]})
+
+
+HB1.writeRawFilename('HB1.dat') 

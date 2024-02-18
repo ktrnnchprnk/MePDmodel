@@ -44,10 +44,12 @@ f=figure(1); clf;
 f.Units="centimeters";
 % f.OuterPosition = [3 3 16 21];
 
-f.OuterPosition = [3 3 13 20];
+f.OuterPosition = [3 3 13 21];
 
 
-subplot(3,1,2)
+width=11;
+height=3;
+axes('Units', 'centimeters','Position', [1, 9, width, height])
 hold on; box on; grid off; 
 set ( gca , 'FontSize' , 8 , 'fontname' , 'Arial','FontWeight', 'bold');
 plot(PeriodBoth(:,1), PeriodBoth(:,8), 'LineWidth', 1.5, 'Color','k','LineStyle','-')
@@ -82,7 +84,7 @@ hold off
 
 jl=1.5;
 je=0.5;
-subplot(3,1,3)
+axes('Units', 'centimeters','Position', [1, 4.7, width, height])
 hold on; box on; grid off; 
 set ( gca , 'FontSize' , 8 , 'fontname' , 'Arial','FontWeight', 'bold');
 plot(Stable(:,1), jl*Stable(:,2), 'Color',colour.green,'LineStyle','-','LineWidth',1.5)
@@ -106,14 +108,14 @@ title('c')
 xlim([0 endy])
 ylim([0 0.3])
 xlabel('Stimulation', 'FontName','Arial', 'FontWeight','bold')
-ylabel('MePD input to KNDy (Hz)')
+ylabel('Weighted MePD activity(Hz)')
 
 legend( 'Glu', 'GABA_{eff}',Location='northwest');
 
 
 % legend('Glutamatergic contribution', 'GABAergic contribution',Location='northwest'
 
-axes ('Units', 'centimeters','Position',[1.5 12.1 10 4])
+axes('Units', 'centimeters','Position', [1, 13.3, width, height+1])
 % axis off
 set ( gca , 'FontSize' , 9 , 'fontname' , 'Arial','FontWeight', 'bold');
 title('a')
@@ -186,6 +188,37 @@ ylim([7 22])
 txt={'Ctrl', 'Ctrl Virus', '2 Hz', '5 Hz', '10 Hz', '20 Hz'};
 xticklabels(txt)
 ylabel('LH IPI (min)')
+
+
+load("par.mat")
+opts = odeset('RelTol',1e-6,'AbsTol',1e-8);
+Kplin = linspace(0,2,150);
+Tinit=0;
+Tmax=200;
+Dt =0.1;
+Tspan = Tinit:Dt:Tmax;
+for i = 1:length(Kplin)
+    disp(i)
+    par.Kp=Kplin(i);
+    X0 = zeros(6,1);
+    [~, Y]=ode45(@MePD_sys,Tspan,X0,opts, par);
+    X0 = Y(end,:);
+    
+    X0(4:6)=zeros(3,1);
+    [T, Y]=ode45(@MePD_sys,Tspan,X0,opts, par);
+    Out(i) = jl*Y(end,4)/Tmax-je*Y(end,6)/Tmax;
+end
+save("Out.mat", 'Out')
+%%
+load('Out.mat')
+axes('Units', 'centimeters','Position', [1, 1, width, 2.3])
+hold on; box on; grid off; 
+set ( gca , 'FontSize' , 8 , 'fontname' , 'Arial','FontWeight', 'bold');
+plot(Kplin, Out, 'Color','k','LineStyle','-','LineWidth',1.5)
+ylabel('Mean MePD output (Hz)')
+xlabel('Stimulation')
+subtitle('d', 'FontWeight','bold')
+
 
 saveas(f,'figure6.svg','svg')
 saveas(f,'figure6.eps','eps')

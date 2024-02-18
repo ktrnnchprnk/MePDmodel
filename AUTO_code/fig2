@@ -1,0 +1,30 @@
+# Kp continuation
+
+r1=run('MePDv4', UZSTOP = {'Kp': 30})
+r2=run(r1('HB1'),IPS=2,NMX=5500,NPR=500,ICP=['Kp','PERIOD'],DS=0.0001,DSMAX=0.01)
+r1.writeRawFilename('KpLCr1.dat')
+r2.writeRawFilename('KpLCr2.dat')
+
+# Kp - alpha continuation 
+
+
+HB1=run(r1('HB1'),ISW=2,ICP=['Kp','alpha'],NMX=100000,NPR=10000,DSMAX=1e-2, UZSTOP = {'alpha': [0,2.0],'Kp': [0.0,25]})
+HB2=run(r1('HB1'),ISW=2,ICP=['Kp','alpha'],NMX=100000,NPR=10000,DSMAX=1e-2, UZSTOP = {'alpha': [0,2.0],'Kp': [0.0,25]}, DS='-')
+
+
+c1=run('MePDv4', UZSTOP = {'Kp': 30}, PAR = {'alpha':0.85})
+
+LP1v1=run(c1('LP1'),ISW=2,ICP=['Kp','alpha'],NMX=40000,NPR=10000,DSMAX=1e-2,UZSTOP = {'alpha': 2.0}, DS='-') #CP814
+
+b1=run('MePDv4', UZSTOP = {'Kp': 30}, PAR = {'alpha':0.98})
+b2=run(b1('HB1'),IPS=2,NMX=1450,NPR=15200,ICP=['Kp','PERIOD'],DS=0.0001,DSMAX=0.01, NTST=150)
+HOM1=run(b2,IRS=9,IPS=9,ICP=['Kp','alpha'],NMX=6000,NPR=1000,DSMAX=1e-3,SP = ['BP5'])
+HOM2=run(b2,IRS=9,IPS=9,ICP=['Kp','alpha'],NMX=6000,NPR=1000,DSMAX=1e-3,SP = ['BP5', 'LP1'], DS='-')
+
+
+HB1.writeRawFilename('HB1.dat') 
+HB2.writeRawFilename('HB2.dat')
+LP1v1.writeRawFilename('LP1v1.dat')
+HOM1.writeRawFilename('HOM1.dat')
+HOM2.writeRawFilename('HOM2.dat')
+
